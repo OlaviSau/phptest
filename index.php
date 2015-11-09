@@ -17,7 +17,7 @@ $fileName = 'output.xml.cache';
 
 $cache = new \olavi\Cache('cache/');
 
-
+	echo '<ul id="data">';
 if(!$cache->isCacheFileValid($fileName, 3600)){
 
 	$pdo = new PDO('mysql:host='.cnf::SERVER_NAME.';dbname='.cnf::DB_NAME, cnf::USER_NAME, cnf::PASSWORD);
@@ -26,7 +26,6 @@ if(!$cache->isCacheFileValid($fileName, 3600)){
 	$cache->setCacheFile($fileName, $content);
 	$xml = $cache->getCacheFile($fileName, 3600) or die('Cache Error');
 
-	echo '<ul id="data">';
 	foreach ($xml -> product as $row) {
 		$parentSku = $row -> parentSku;
 		$category = $row -> category;
@@ -86,10 +85,9 @@ if(!$cache->isCacheFileValid($fileName, 3600)){
 		$pdostm->execute();
 		
 	}
-	echo '</ul>';
+	
 } else {
 	$xml = $cache->getCacheFile($fileName, 3600);
-	echo '<ul id="data">';
 	foreach ($xml -> product as $row) {
 		$parentSku = $row -> parentSku;
 		$category = $row -> category;
@@ -112,8 +110,8 @@ if(!$cache->isCacheFileValid($fileName, 3600)){
 		$html = "<li class='data-container' id=".htmlspecialchars($productID)."><span class='product-id'>productID:".htmlspecialchars($productID)." </span><span>name:".htmlspecialchars($name)."</span><span>price:".htmlspecialchars($price)."</span><span>amount: ".htmlspecialchars($amount)."</span></li>";
 		echo $html;
 	}
-	echo '</ul>';
 }
+echo '</ul>';
 ?>
 <script src="scripts.js"></script>
 </body>
