@@ -18,7 +18,7 @@ $fileName = 'output.xml.cache';
 $cache = new \olavi\Cache('cache/');
 
 
-if(!$cache->isCacheFileValid('output.xml.cache', 3600)){
+if(!$cache->isCacheFileValid($fileName, 3600)){
 
 	$pdo = new PDO('mysql:host='.cnf::SERVER_NAME.';dbname='.cnf::DB_NAME, cnf::USER_NAME, cnf::PASSWORD);
 	$content = file_get_contents(cnf::OUTPUT_XML_URL);
